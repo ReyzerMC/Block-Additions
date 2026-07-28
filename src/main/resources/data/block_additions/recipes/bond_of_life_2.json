@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " S ",
+    "BNB",
+    "C C"
+  ],
+  "key": {
+    "S": { "item": "minecraft:nether_star" },
+    "B": { "item": "minecraft:book" },
+    "N": { "item": "minecraft:netherite_block" },
+    "C": { "item": "block_additions:blood_crystal" }
+  },
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "count": 1,
+    "nbt": "{StoredEnchantments:[{id:\"block_additions:bond_of_life\",lvl:2}]}"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "block_additions:crimson_follower_base",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 200,
+    "separation": 100,
+    "salt": 84720193
+  }
+}
