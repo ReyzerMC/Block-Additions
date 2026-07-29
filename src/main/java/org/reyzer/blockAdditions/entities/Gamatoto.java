@@ -22,7 +22,8 @@ import javax.annotation.Nullable;
 public class Gamatoto extends WanderingTrader {
     public Gamatoto(EntityType<? extends WanderingTrader> type, Level level) {
         super(type, level);
-        this.setCustomName(Component.literal("Gamatoto").withStyle(ChatFormatting.BOLD, ChatFormatting.AQUA));
+        this.setCustomName(Component.translatable("entity.block_additions.gamatoto")
+                .withStyle(ChatFormatting.BOLD, ChatFormatting.AQUA));
         this.setCustomNameVisible(true);
     }
 
