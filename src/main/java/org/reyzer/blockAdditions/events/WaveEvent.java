@@ -29,7 +29,6 @@ public class WaveEvent {
                 return;
             }
 
-            // Spawn de la Entidad
             WaveEntity wave = new WaveEntity(ModEntities.WAVE_PROJECTILE.get(), player.level());
             wave.setOwner(player);
             wave.setWaveLevel(waveLevel);
@@ -40,7 +39,6 @@ public class WaveEvent {
 
             player.level().addFreshEntity(wave);
 
-            // ⏳ Aplicar el Cooldown nativo al ítem que sostiene
             player.getCooldowns().addCooldown(mainHand.getItem(), COOLDOWN_TICKS);
         }
     }

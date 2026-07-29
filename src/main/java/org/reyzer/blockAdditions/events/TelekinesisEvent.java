@@ -49,7 +49,6 @@ public class TelekinesisEvent {
             List<ItemStack> drops = state.getDrops(builder);
             if (drops.isEmpty()) return;
 
-            // Verificar si la herramienta TAMBIÉN tiene Hot Stuff para aplicar el cocinado
             int hotStuffLevel = EnchantmentHelper.getTagEnchantmentLevel(ModEnchantments.HOT_STUFF.get(), tool);
             if (hotStuffLevel > 0) {
                 for (int i = 0; i < drops.size(); i++) {
@@ -66,7 +65,6 @@ public class TelekinesisEvent {
                 }
             }
 
-            // Guardar en el inventario de manera segura
             for (ItemStack drop : drops) {
                 ItemStack stackToAdd = drop.copy();
                 player.getInventory().add(stackToAdd);
@@ -76,7 +74,6 @@ public class TelekinesisEvent {
                 }
             }
 
-            // Destruir el bloque de forma limpia y cancelar el evento original de Minecraft
             serverLevel.destroyBlock(pos, false, player);
             event.setExpToDrop(0);
             event.setCanceled(true);

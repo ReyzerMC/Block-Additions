@@ -13,7 +13,6 @@ public class ClientModEvents {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        // Vincula tu entidad con el renderer del Esqueleto/WitherSkeleton estándar
         event.registerEntityRenderer(ModEntities.CRIMSON_MOON_FOLLOWER.get(), WitherSkeletonRenderer::new);
     }
 }

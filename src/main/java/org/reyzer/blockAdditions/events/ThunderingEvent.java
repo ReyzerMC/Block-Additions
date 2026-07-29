@@ -20,12 +20,11 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ThunderingEvent {
 
     private final Map<UUID, Long> cooldowns = new HashMap<>();
-    private static final long COOLDOWN_TIME = 3000; // 3 segundos en ms
+    private static final long COOLDOWN_TIME = 3000;
 
     @SubscribeEvent
     public void onLivingHurt(LivingHurtEvent event) {
 
-        // 1. Evitar bucles infinitos con la misma fuente de daño
         if (event.getSource().is(net.minecraft.world.damagesource.DamageTypes.LIGHTNING_BOLT)) {
             return;
         }
@@ -48,36 +47,29 @@ public class ThunderingEvent {
                 UUID attackerUUID = attacker.getUUID();
                 long currentTime = System.currentTimeMillis();
 
-                // 2. CHECK DE COOLDOWN (Validar antes de crear entidades)
                 if (cooldowns.containsKey(attackerUUID)) {
                     long lastUse = cooldowns.get(attackerUUID);
                     if (currentTime - lastUse < COOLDOWN_TIME) {
-                        return; // Sigue en cooldown, no hace nada
+                        return;
                     }
                 }
 
-                // 3. CHECK DE PROBABILIDAD (35% de chance)
                 if (ThreadLocalRandom.current().nextDouble() >= 0.35) {
-                    return; // No superó la probabilidad
+                    return;
                 }
 
-                // 4. SI PASA AMBAS PRUEBAS: Registrar nuevo tiempo de cooldown
                 cooldowns.put(attackerUUID, currentTime);
 
-                // 5. Crear e invocar el rayo
                 LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level);
 
                 if (lightningBolt != null) {
                     Vec3 victimPos = victim.position();
                     lightningBolt.moveTo(victimPos);
 
-                    // Hacerlo visual o real según prefieras
                     level.addFreshEntity(lightningBolt);
 
-                    // 6. Aplicar el daño personalizado
                     float lightningDmg = 5f * enchantmentLevel;
 
-                    // Resetear invulnerability ticks para asegurar que el daño del rayo entre junto al golpe
                     victim.invulnerableTime = 0;
                     victim.hurt(level.damageSources().lightningBolt(), lightningDmg);
                 }

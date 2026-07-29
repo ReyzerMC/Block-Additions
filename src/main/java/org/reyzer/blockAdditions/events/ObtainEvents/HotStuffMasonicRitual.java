@@ -67,7 +67,6 @@ public class HotStuffMasonicRitual {
 
     @SubscribeEvent
     public static void onLevelTick(TickEvent.LevelTickEvent event) {
-        // CORRECCIÓN CLAVE 1: Ignorar ticks del cliente y de cualquier dimensión que NO sea el Nether
         if (event.phase != TickEvent.Phase.END || event.level.isClientSide()) return;
         if (event.level.dimension() != Level.NETHER) return;
 
@@ -80,7 +79,6 @@ public class HotStuffMasonicRitual {
             BlockPos pos = entry.getKey();
             RitualState state = entry.getValue();
 
-            // Si rompen el caldero, cancelar ritual
             if (!level.getBlockState(pos).is(Blocks.LAVA_CAULDRON)) {
                 toRemove.add(pos);
                 continue;
@@ -93,10 +91,8 @@ public class HotStuffMasonicRitual {
                 continue;
             }
 
-            // CORRECCIÓN CLAVE 2: Detectar e interceptar ítems en CADA TICK
             checkAndConsumeItems(level, pos, state);
 
-            // Partículas y daño a entidades cercanas cada 10 ticks (0.5s)
             if (state.ticksActive % 10 == 0) {
                 double x = pos.getX() + 0.5;
                 double y = pos.getY() + 0.8;
@@ -119,7 +115,6 @@ public class HotStuffMasonicRitual {
     }
 
     private static void checkAndConsumeItems(ServerLevel level, BlockPos pos, RitualState state) {
-        // CORRECCIÓN CLAVE 3: Caja de detección amplia justo encima y dentro del caldero
         AABB cauldronBox = new AABB(
                 pos.getX() - 0.2, pos.getY() + 0.4, pos.getZ() - 0.2,
                 pos.getX() + 1.2, pos.getY() + 1.8, pos.getZ() + 1.2

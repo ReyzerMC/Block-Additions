@@ -54,7 +54,6 @@ public class WaveEntity extends Projectile {
 
         this.setPos(nextPos);
 
-        // 1. ESTELA DE FUEGO AZUL (CLIENTE)
         if (this.level().isClientSide) {
             double scatter = 0.2D + (this.waveLevel * 0.1D);
 
@@ -75,7 +74,6 @@ public class WaveEntity extends Projectile {
             }
         }
 
-        // 2. COLISIONES Y DAÑO (SERVIDOR)
         if (!this.level().isClientSide) {
 
             // Impacto con bloques
@@ -86,7 +84,6 @@ public class WaveEntity extends Projectile {
                 return;
             }
 
-            // Impacto con entidades
             float radius = 0.8F + (this.waveLevel * 0.3F);
             AABB searchBox = this.getBoundingBox().inflate(radius, 0.5, radius);
             List<LivingEntity> targets = this.level().getEntitiesOfClass(LivingEntity.class, searchBox, this::canHitEntity);
@@ -104,7 +101,6 @@ public class WaveEntity extends Projectile {
 
                     target.knockback(0.4D, -motion.x, -motion.z);
 
-                    // Partículas de impacto en el centro de la entidad alcanzada
                     Vec3 targetCenter = target.position().add(0, target.getBbHeight() / 2.0, 0);
                     spawnImpactParticles(targetCenter, 15);
 
@@ -112,7 +108,6 @@ public class WaveEntity extends Projectile {
                 }
             }
 
-            // Tiempo límite antes de disiparse
             if (this.tickCount > 25) {
                 spawnImpactParticles(this.position(), 10);
                 this.discard();
@@ -120,9 +115,6 @@ public class WaveEntity extends Projectile {
         }
     }
 
-    /**
-     * Emite una ráfaga omnidireccional de partículas de fuego azul desde el servidor.
-     */
     private void spawnImpactParticles(Vec3 point, int count) {
         if (this.level() instanceof ServerLevel serverLevel) {
             // Explosión de Fuego Azul

@@ -37,17 +37,16 @@ public class HellForgedWitherEvent {
     private int getHellForgedLevel(RandomSource random) {
         double roll = random.nextDouble() * 100; // Número entre 0.0 y 99.99...
 
-        // Evaluamos de menor probabilidad a mayor probabilidad (mutuamente excluyente)
-        if (roll < 3.0) {           // 3% de probabilidad (0 - 2.99)
+        if (roll < 3.0) {
             return 4;
-        } else if (roll < 9.0) {    // 6% de probabilidad (3.0 - 8.99) -> 3% + 6% = 9%
+        } else if (roll < 9.0) {
             return 3;
-        } else if (roll < 19.0) {   // 10% de probabilidad (9.0 - 18.99) -> 9% + 10% = 19%
+        } else if (roll < 19.0) {
             return 2;
-        } else if (roll < 34.0) {   // 15% de probabilidad (19.0 - 33.99) -> 19% + 15% = 34%
+        } else if (roll < 34.0) {
             return 1;
         }
 
-        return -1; // 66% de probabilidad de no soltar nada (34.0 - 99.99)
+        return -1;
     }
 }

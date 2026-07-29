@@ -45,7 +45,7 @@ public class BondOfLifeBoss extends WitherSkeleton {
     private final List<WitherSkeleton> activeMinions = new ArrayList<>();
     private boolean isInvulnerablePhase = false;
     private int teleportCooldown = 0;
-    private int rangedAttackCooldown = 0; // Cooldown interno para disparar calaveras
+    private int rangedAttackCooldown = 0;
 
     public BondOfLifeBoss(EntityType<? extends WitherSkeleton> type, Level level) {
         super(type, level);
@@ -76,7 +76,6 @@ public class BondOfLifeBoss extends WitherSkeleton {
             activeMinions.removeIf(minion -> !minion.isAlive());
 
             if (isInvulnerablePhase) {
-                // Durante la fase de esbirros se queda inmóvil defendiendo
                 this.getNavigation().stop();
 
                 if (activeMinions.isEmpty()) {
@@ -94,7 +93,6 @@ public class BondOfLifeBoss extends WitherSkeleton {
 
         if (this.level().isClientSide()) return;
 
-        // Comprobación de cambio de fases
         float healthRatio = this.getHealth() / this.getMaxHealth();
 
         if (!phase75Triggered && healthRatio <= 0.75F) {
@@ -117,19 +115,16 @@ public class BondOfLifeBoss extends WitherSkeleton {
         if (target != null && target.isAlive()) {
             double distanceSq = this.distanceToSqr(target);
 
-            // 1. Teletransporte si está muy lejos (> 10 bloques)
             if (distanceSq > 100.0D && teleportCooldown <= 0) {
                 teleportTowardsTarget(target);
-                teleportCooldown = 200; // 10 segundos
+                teleportCooldown = 200;
             }
-            // 2. Ataque a distancia (Calavera Wither) cada 2.5 segundos (50 ticks) si está entre 4 y 20 bloques
             else if (distanceSq >= 16.0D && distanceSq <= 400.0D && rangedAttackCooldown <= 0) {
                 shootWitherSkull(target);
                 rangedAttackCooldown = 50;
             }
         }
 
-        // Habilidad de Robo de Vida (Siphon) por debajo del 50% de HP
         if (this.getHealth() < this.getMaxHealth() * 0.5F && this.tickCount % 100 == 0) {
             AABB area = this.getBoundingBox().inflate(8.0D);
             List<LivingEntity> nearby = this.level().getEntitiesOfClass(LivingEntity.class, area, e -> e != this);
@@ -235,14 +230,12 @@ public class BondOfLifeBoss extends WitherSkeleton {
 
     @Override
     protected void registerGoals() {
-        // Metas de comportamiento
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false)); // Persigue activamente y ataca con la espada
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
 
-        // Selección de objetivo
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }

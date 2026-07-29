@@ -65,9 +65,7 @@ public class HotStuffEvent {
                 }
             }
 
-            // Si se cocinó al menos un ítem:
             if (cookedAny) {
-                // Si NO tiene telequinesis, simplemente los soltamos aquí y destruimos el bloque.
                 int telekinesisLevel = EnchantmentHelper.getTagEnchantmentLevel(ModEnchantments.TELEKINESIS.get(), tool);
 
                 if (telekinesisLevel <= 0) {
@@ -75,10 +73,8 @@ public class HotStuffEvent {
                         Block.popResource(serverLevel, pos, drop);
                     }
                     serverLevel.destroyBlock(pos, false, player);
-                    event.setCanceled(true); // Solo cancelamos si Telequinesis NO va a actuar
+                    event.setCanceled(true);
                 }
-                // NOTA: Si SÍ tiene telequinesis, NO cancelamos el evento.
-                // Dejamos que el bloque siga intacto para que TelekinesisEvent (que corre en NORMAL) lo procese.
             }
         }
     }
