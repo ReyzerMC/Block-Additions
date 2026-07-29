@@ -1,6 +1,8 @@
 package org.reyzer.blockAdditions.entities;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -20,6 +22,8 @@ import javax.annotation.Nullable;
 public class Gamatoto extends WanderingTrader {
     public Gamatoto(EntityType<? extends WanderingTrader> type, Level level) {
         super(type, level);
+        this.setCustomName(Component.literal("Gamatoto").withStyle(ChatFormatting.BOLD, ChatFormatting.AQUA));
+        this.setCustomNameVisible(true);
     }
 
     @Override
@@ -30,9 +34,9 @@ public class Gamatoto extends WanderingTrader {
         ItemStack customBook1 = new ItemStack(Items.ENCHANTED_BOOK);
         customBook1.enchant(ModEnchantments.ARREBATO.get(), 1);
         ItemStack customBook2 = new ItemStack(Items.ENCHANTED_BOOK);
-        customBook2.enchant(ModEnchantments.ARREBATO.get(), 1);
+        customBook2.enchant(ModEnchantments.ARREBATO.get(), 2);
         ItemStack customBook3 = new ItemStack(Items.ENCHANTED_BOOK);
-        customBook3.enchant(ModEnchantments.ARREBATO.get(), 1);
+        customBook3.enchant(ModEnchantments.ARREBATO.get(), 3);
 
         offers.add(addOffer(new ItemStack(Items.NETHER_STAR, 1), new ItemStack(Items.BOOK, 1), customBook1, 1, 12, 0.05F));
         offers.add(addOffer(new ItemStack(Items.NETHER_STAR, 2), new ItemStack(Items.BOOK, 1), customBook2, 1, 16, 0.10F));
