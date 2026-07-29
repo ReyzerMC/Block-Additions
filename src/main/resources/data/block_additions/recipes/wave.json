@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DDD",
+    "DCD",
+    "DDD"
+  ],
+  "key": {
+    "D": { "item": "minecraft:diamond_block" },
+    "C": { "item": "minecraft:conduit" }
+  },
+  "result": {
+    "item": "minecraft:enchanted_book",
+    "count": 1,
+    "nbt": "{StoredEnchantments:[{id:\"block_additions:wave\",lvl:1}]}"
+  }
+}
