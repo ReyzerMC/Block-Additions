@@ -7,6 +7,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.reyzer.blockAdditions.bosses.BondOfLifeBoss;
 import org.reyzer.blockAdditions.events.*;
 import org.reyzer.blockAdditions.events.ObtainEvents.BossEvents;
+import org.reyzer.blockAdditions.events.ObtainEvents.DragonEggCraftingHandler;
 import org.reyzer.blockAdditions.events.ObtainEvents.EntityStruckLightningEvent;
 import org.reyzer.blockAdditions.events.ObtainEvents.HellForgedWitherEvent;
 import org.reyzer.blockAdditions.init.ModEffects;
@@ -39,7 +40,8 @@ public class BlockAdditions {
                 // ObtainEvents
                 new EntityStruckLightningEvent(),
                 new HellForgedWitherEvent(),
-                new BossEvents()
+                new BossEvents(),
+                new DragonEggCraftingHandler()
         );
     }
 
