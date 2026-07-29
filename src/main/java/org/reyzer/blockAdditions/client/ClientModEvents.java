@@ -1,5 +1,6 @@
 package org.reyzer.blockAdditions.client;
 
+import net.minecraft.client.renderer.entity.WanderingTraderRenderer;
 import net.minecraft.client.renderer.entity.WitherSkeletonRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -14,5 +15,6 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.CRIMSON_MOON_FOLLOWER.get(), WitherSkeletonRenderer::new);
+        event.registerEntityRenderer(ModEntities.GAMATOTO.get(), WanderingTraderRenderer::new);
     }
 }
