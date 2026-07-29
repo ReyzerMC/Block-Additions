@@ -1,6 +1,7 @@
 package org.reyzer.blockAdditions.entities;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.DifficultyInstance;
@@ -8,6 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.animal.Cat;
+import net.minecraft.world.entity.animal.CatVariant;
 import net.minecraft.world.entity.npc.WanderingTrader;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -18,6 +20,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import org.reyzer.blockAdditions.init.ModEnchantments;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class Gamatoto extends WanderingTrader {
     public Gamatoto(EntityType<? extends WanderingTrader> type, Level level) {
@@ -74,6 +77,7 @@ public class Gamatoto extends WanderingTrader {
                 companion.moveTo(this.getX() + (i == 0 ? 1 : -1), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                 companion.setLeashedTo(this, true);
                 companion.setOwnerUUID(this.getUUID());
+                companion.setVariant(Objects.requireNonNull(BuiltInRegistries.CAT_VARIANT.get(CatVariant.WHITE)));
                 level.addFreshEntity(companion);
             }
         }
