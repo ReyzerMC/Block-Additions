@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.reyzer.blockAdditions.BlockAdditions;
 import org.reyzer.blockAdditions.bosses.BondOfLifeBoss;
 import org.reyzer.blockAdditions.enchantments.BondOfLife;
+import org.reyzer.blockAdditions.entities.Gamatoto;
 import org.reyzer.blockAdditions.entities.WaveEntity;
 
 public class ModEntities {
@@ -28,4 +29,10 @@ public class ModEntities {
                     () -> EntityType.Builder.of(BondOfLifeBoss::new, MobCategory.MONSTER)
                             .sized(0.7F, 2.4F)
                             .build("crimson_moon_follower"));
+
+    public static final RegistryObject<EntityType<Gamatoto>> GAMATOTO =
+            ENTITIES.register("gamatoto",
+                    () -> EntityType.Builder.of(Gamatoto::new, MobCategory.CREATURE)
+                            .sized(0.6F, 1.95F)
+                            .build("gamatoto"));
 }
