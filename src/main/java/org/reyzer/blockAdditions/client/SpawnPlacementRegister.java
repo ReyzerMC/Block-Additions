@@ -6,6 +6,7 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.reyzer.blockAdditions.entities.Gamatoto;
 import org.reyzer.blockAdditions.init.ModEntities;
 
 @Mod.EventBusSubscriber(modid = "block_additions", bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -16,7 +17,7 @@ public class SpawnPlacementRegister {
                 ModEntities.GAMATOTO.get(),
                 SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                Mob::checkMobSpawnRules,
+                Gamatoto::checkGamatotoSpawnRules,
                 SpawnPlacementRegisterEvent.Operation.REPLACE
         );
     }
