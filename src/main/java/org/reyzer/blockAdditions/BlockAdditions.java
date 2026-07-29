@@ -4,7 +4,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.reyzer.blockAdditions.bosses.BondOfLifeBoss;
 import org.reyzer.blockAdditions.events.*;
 import org.reyzer.blockAdditions.events.ObtainEvents.BossEvents;
 import org.reyzer.blockAdditions.events.ObtainEvents.DragonEggCraftingHandler;
